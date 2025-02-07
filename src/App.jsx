@@ -49,6 +49,16 @@ import galeria6 from './assets/galeria6.jpeg';
 import dormitorio from './assets/dormitorio.jpg';
 import WhatsAppButton from './Components/WhatsappButton';
 
+const phoneNumber = '573102091249';
+const defaultMessage = encodeURIComponent('Hola, me gustaría saber más sobre tus servicios.'); // Codifica el mensaje para URL
+
+const handleClick = () => {
+  // Construye la URL de WhatsApp
+  const waUrl = `https://wa.me/${phoneNumber}?text=${defaultMessage}`;
+  // Redirecciona al usuario a WhatsApp
+  window.open(waUrl, '_blank');
+};
+
 const Navigation = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const bgColor = useColorModeValue('white', 'gray.800');
@@ -156,6 +166,7 @@ const Hero = () => {
               size="lg"
               colorScheme="purple"
               leftIcon={<FaShoppingCart />}
+              onClick={handleClick}
             >
               Ver Catálogo
             </Button>
@@ -238,8 +249,9 @@ const ProductShowcase = () => {
                   w="full"
                   colorScheme="purple"
                   leftIcon={<FaShoppingCart />}
+                  onClick={handleClick}
                 >
-                  Añadir al Carrito
+                  Contáctanos
                 </Button>
               </CardFooter>
             </Card>
@@ -462,7 +474,7 @@ const App = () => {
     <Box minH="100vh">
       <Header />
       <Box as="main">
-      <WhatsAppButton />
+        <WhatsAppButton />
         <Hero />
         <ProductShowcase />
         <BlanketGallery />
