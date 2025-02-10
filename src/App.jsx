@@ -48,6 +48,12 @@ import galeria5 from './assets/galeria5.jpeg';
 import galeria6 from './assets/galeria6.jpeg';
 import dormitorio from './assets/dormitorio.jpg';
 import WhatsAppButton from './Components/WhatsappButton';
+import { motion } from 'framer-motion';
+
+const fadeInUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.8 } }
+};
 
 const phoneNumber = '573102091249';
 const defaultMessage = encodeURIComponent('Hola, me gustaría saber más sobre tus servicios.'); // Codifica el mensaje para URL
@@ -171,14 +177,9 @@ const Hero = () => {
               Ver Catálogo
             </Button>
           </VStack>
-          <Box maxW={{ base: 'full', md: '50%' }}>
-            <Image
-              src={portada}
-              alt="Cobija térmica premium"
-              borderRadius="lg"
-              shadow="xl"
-            />
-          </Box>
+          <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} transition={{ duration: 1 }}>
+            <Image src={portada} alt="Cobija térmica premium" borderRadius="lg" shadow="xl" boxSize={700} />
+          </motion.div>
         </Flex>
       </Container>
     </Box>
@@ -220,41 +221,43 @@ const ProductShowcase = () => {
           Nuestros Productos Destacados
         </Heading>
         <SimpleGrid columns={{ base: 1, md: 3 }} spacing={8}>
-          {products.map((product) => (
-            <Card key={product.id}>
-              <CardBody>
-                <Image
-                  src={product.image}
-                  alt={product.name}
-                  borderRadius="lg"
-                  mb={4}
-                />
-                <Stack spacing={3}>
-                  <Heading size="md">{product.name}</Heading>
-                  <Text>{product.description}</Text>
-                  <Flex justify="space-between" align="center">
-                    <Text color="purple.600" fontSize="2xl" fontWeight="bold">
-                      {product.price}
-                    </Text>
-                    <Flex>
-                      {Array.from({ length: product.rating }).map((_, i) => (
-                        <FaStar key={i} color="#FFB400" />
-                      ))}
+          {products.map((product, index) => (
+            <motion.div key={product.id} initial={{ opacity: 0, y: 50 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.2, duration: 0.5 }}>
+              <Card key={product.id}>
+                <CardBody>
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    borderRadius="lg"
+                    mb={4}
+                  />
+                  <Stack spacing={3}>
+                    <Heading size="md">{product.name}</Heading>
+                    <Text>{product.description}</Text>
+                    <Flex justify="space-between" align="center">
+                      <Text color="purple.600" fontSize="2xl" fontWeight="bold">
+                        {product.price}
+                      </Text>
+                      <Flex>
+                        {Array.from({ length: product.rating }).map((_, i) => (
+                          <FaStar key={i} color="#FFB400" />
+                        ))}
+                      </Flex>
                     </Flex>
-                  </Flex>
-                </Stack>
-              </CardBody>
-              <CardFooter>
-                <Button
-                  w="full"
-                  colorScheme="purple"
-                  leftIcon={<FaShoppingCart />}
-                  onClick={handleClick}
-                >
-                  Contáctanos
-                </Button>
-              </CardFooter>
-            </Card>
+                  </Stack>
+                </CardBody>
+                <CardFooter>
+                  <Button
+                    w="full"
+                    colorScheme="purple"
+                    leftIcon={<FaShoppingCart />}
+                    onClick={handleClick}
+                  >
+                    Contáctanos
+                  </Button>
+                </CardFooter>
+              </Card>
+            </motion.div>
           ))}
         </SimpleGrid>
       </Container>
@@ -356,7 +359,7 @@ const Contact = () => {
               <VStack spacing={4}>
                 <FaPhone size={24} color="purple" />
                 <Heading size="md">Teléfono</Heading>
-                <Text>+593 99 999 9999</Text>
+                <Text>+57 310 209 1249</Text>
               </VStack>
             </CardBody>
           </Card>
@@ -376,7 +379,7 @@ const Contact = () => {
               <VStack spacing={4}>
                 <FaMapMarkerAlt size={24} color="purple" />
                 <Heading size="md">Dirección</Heading>
-                <Text>Av. Principal 123, Quito, Ecuador</Text>
+                <Text>Bogotá</Text>
               </VStack>
             </CardBody>
           </Card>
@@ -421,7 +424,7 @@ const Footer = () => {
             <VStack align="stretch" spacing={2}>
               <Flex align="center" gap={2}>
                 <FaPhone />
-                <Text>+593 99 999 9999</Text>
+                <Text>+57 310 209 1249</Text>
               </Flex>
               <Flex align="center" gap={2}>
                 <FaEnvelope />
@@ -429,7 +432,7 @@ const Footer = () => {
               </Flex>
               <Flex align="center" gap={2}>
                 <FaMapMarkerAlt />
-                <Text>Quito, Ecuador</Text>
+                <Text>Bogotá, Colombia</Text>
               </Flex>
             </VStack>
           </VStack>
