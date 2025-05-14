@@ -235,9 +235,10 @@ const ProductShowcase = () => {
                     <Heading size="md">{product.name}</Heading>
                     <Text>{product.description}</Text>
                     <Flex justify="space-between" align="center">
-                      <Text color="purple.600" fontSize="2xl" fontWeight="bold">
+
+                      {/* <Text color="purple.600" fontSize="2xl" fontWeight="bold">
                         {product.price}
-                      </Text>
+                      </Text> */}
                       <Flex>
                         {Array.from({ length: product.rating }).map((_, i) => (
                           <FaStar key={i} color="#FFB400" />
